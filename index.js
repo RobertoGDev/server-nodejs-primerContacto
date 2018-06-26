@@ -10,6 +10,7 @@ function releaseContent(req, res) {
     
     //Obtengo los valores que van a estar fijos
     let validUrls = ["/", "/home", "/bio", "/servicios", "/contacto"];
+    let resourceUrls = ["/img", "/css", "/js"];
     let file;
     
     //Preparo el contenidop
@@ -21,7 +22,10 @@ function releaseContent(req, res) {
         if(req.url === "") { // No funciona esto si no tiene barra ni url???
             file = 'index.html';
         }
-    } 
+    } else if (resourceUrls.indexOf(req.url) !== -1) {
+        res.statusCode = 200;
+        file = req.url;
+    }
     else {
         res.statusCode = 404; 
         file = '404.html'; 
